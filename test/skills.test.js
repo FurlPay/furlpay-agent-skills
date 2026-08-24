@@ -125,6 +125,72 @@ test("get-started skill carries the non-negotiable integration rules", () => {
   }
 });
 
+test("auth skill states the single-writer rule for u.security", () => {
+  const { body } = frontmatter(path.join(skillsDir, "furlpay-auth", "SKILL.md"));
+  // AGENTS.md rule 4: u.security holds totpSecret and is writable only through
+  // /api/security/mfa. A skill that omits this teaches mass assignment by silence.
+  assert.match(body, /u\.security/, "must name the object");
+  assert.match(body, /\/api\/security\/mfa/, "must name the only endpoint that may write it");
+  assert.match(body, /totpSecret/, "must say what is at stake");
+  // services/payments.ts: FURLPAY_HITL_THRESHOLD_USD || 3000
+  assert.match(body, /\$3,?000|3000/, "step-up threshold must be stated");
+  assert.match(body, /httpOnly/, "session storage guidance must be present");
+});
+
+test("payments skill refuses float money and states the verified fee", () => {
+  const { body } = frontmatter(path.join(skillsDir, "furlpay-payments", "SKILL.md"));
+  assert.match(body, /bigint|BigInt/, "must require integer atomic units");
+  assert.match(body, /0\.30000000000000004|never a float|not a float/i, "must show why floats fail");
+  // services/payments.ts:26 — export const FEE_RATE = 0.005;
+  assert.match(body, /0\.5%/, "the 0.5% platform fee must be stated");
+  assert.match(body, /Idempotency-Key/, "idempotency header must be shown");
+  assert.match(body, /record.*before.*submit|record the payment as `created`/i,
+    "record-before-submit ordering must be stated");
+});
+
+test("wallet skill forbids lowercasing base58 and requires pairwise validation", () => {
+  const { body } = frontmatter(path.join(skillsDir, "furlpay-wallet", "SKILL.md"));
+  // Base58 is case-sensitive; lowercasing a Solana address corrupts it and can
+  // collide two distinct addresses. This is the trap the skill exists to close.
+  assert.match(body, /[Nn]ever lowercase a Solana address/, "must forbid lowercasing base58");
+  assert.match(body, /new PublicKey\(/, "must require a real base58 decode, not a regex");
+  assert.match(body, /isValidForChainKind/, "must name the address-to-chain check");
+  assert.match(body, /findAssociatedTokenPda/, "must cover ATA derivation");
+  assert.match(body, /derived|ledger is right/i, "balances must be described as derived");
+});
+
+test("cards skill keeps PAN off the server and freezes before persisting", () => {
+  const { body } = frontmatter(path.join(skillsDir, "furlpay-cards", "SKILL.md"));
+  assert.match(body, /never touch your server|never hold/i, "must exclude PAN/CVV from the server");
+  assert.match(body, /PCI/, "must explain the scope consequence");
+  assert.match(body, /in-memory state flips immediately|Apply locally, then persist/i,
+    "freeze must take effect before the durable write");
+  assert.match(body, /3DS2/, "must cover the challenge flow");
+  assert.match(body, /single-use/, "challenges must be single-use");
+});
+
+test("travel skill binds the quote chain and claims before the supplier call", () => {
+  const { body } = frontmatter(path.join(skillsDir, "furlpay-travel", "SKILL.md"));
+  assert.match(body, /quoteId/, "booking must reference a server-issued quote");
+  assert.match(body, /nx: true|atomically before/i, "must claim before the external call");
+  assert.match(body, /before calling the supplier|before the external call/i,
+    "claim ordering must be explicit — a claim after the call prevents nothing");
+  assert.match(body, /FurlPayEscrow/, "must name the escrow contract");
+  assert.match(body, /indeterminate/i, "must model the unknown supplier outcome");
+  assert.match(body, /travel_book/, "must separate reading from spending in MCP tools");
+});
+
+test("every skill leads with a failure mode, not the happy path", () => {
+  // The house style: a model already guesses the happy path correctly. The value
+  // of a skill is the part where a plausible implementation is a wrong one.
+  const signals = /never|must not|wrong|breaks|fails|trap|mistake|do not|refuses|hostile|cannot/i;
+  for (const s of skills) {
+    const { body } = frontmatter(path.join(skillsDir, s, "SKILL.md"));
+    const opening = body.slice(0, 1600);
+    assert.match(opening, signals, `${s}: opens without naming a failure mode`);
+  }
+});
+
 test("no skill leaks a credential-shaped literal", () => {
   for (const s of skills) {
     const raw = fs.readFileSync(path.join(skillsDir, s, "SKILL.md"), "utf8");

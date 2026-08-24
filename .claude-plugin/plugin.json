@@ -1,7 +1,7 @@
 {
   "name": "furlpay-skills",
-  "description": "Agent skills for integrating FurlPay: stablecoin payments, webhook signature verification, and selling API access to AI agents over HTTP 402 (x402). Encodes the exact wire contracts and the failure modes that break most first integrations.",
-  "version": "0.1.0",
+  "description": "Agent skills for integrating FurlPay: authentication and passkeys, stablecoin payments, multi-chain wallets, cards and 3DS2, travel booking with escrow, webhook signature verification, and selling API access to AI agents over HTTP 402 (x402). Encodes the exact wire contracts and the failure modes that break most first integrations.",
+  "version": "0.2.0",
   "author": {
     "name": "FurlPay"
   },
@@ -16,6 +16,12 @@
     "x402",
     "webhooks",
     "agentic-payments",
-    "mcp"
+    "mcp",
+    "passkeys",
+    "webauthn",
+    "cards",
+    "travel",
+    "solana",
+    "evm"
   ]
 }

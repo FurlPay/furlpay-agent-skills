@@ -16,6 +16,11 @@ These skills encode them.
 | Skill | Covers |
 |---|---|
 | `furlpay-get-started` | Package selection, env config, mock vs live, the rules every integration must hold |
+| `furlpay-auth` | WebAuthn passkeys, rpID across web/native/extension, session cookies, step-up above $3,000 |
+| `furlpay-payments` | Gasless ERC-4337 transfers, Solana Actions, atomic-unit arithmetic, idempotency, record-before-submit |
+| `furlpay-wallet` | Per-chain address validation, address-to-network binding, Solana ATA derivation, derived balances |
+| `furlpay-cards` | PAN exclusion and PCI scope, instant freeze, velocity limits, 3DS2 challenge resolution |
+| `furlpay-travel` | Time-locked escrow, the quote-to-booking identity chain, one-payment-one-booking, MCP tool safety |
 | `furlpay-webhooks` | HMAC-SHA256 contract, the raw-body requirement, replay protection, safe failure responses |
 | `furlpay-x402` | The 402 handshake, EIP-3009 off-chain authorization, dual atomic claim, confirmation depth, v1/v2 dialects |
 

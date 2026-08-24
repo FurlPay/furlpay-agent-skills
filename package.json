@@ -1,6 +1,6 @@
 {
   "name": "@furlpay/agent-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent skills for integrating FurlPay — stablecoin payments, webhook signature verification, and x402 agent payments. Procedural knowledge for Claude Code, Cursor, Copilot and MCP clients.",
   "license": "MIT",
   "type": "module",
