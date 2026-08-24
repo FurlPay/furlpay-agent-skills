@@ -1,0 +1,27 @@
+{
+  "name": "@furlpay/agent-skills",
+  "version": "0.1.0",
+  "description": "Agent skills for integrating FurlPay — stablecoin payments, webhook signature verification, and x402 agent payments. Procedural knowledge for Claude Code, Cursor, Copilot and MCP clients.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://github.com/FurlPay/furlpay-agent-skills#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FurlPay/furlpay-agent-skills.git"
+  },
+  "files": ["skills", ".claude-plugin", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "node --test test/skills.test.js"
+  },
+  "keywords": [
+    "furlpay",
+    "agent-skills",
+    "claude-code",
+    "mcp",
+    "payments",
+    "stablecoin",
+    "x402",
+    "webhooks"
+  ],
+  "engines": { "node": ">=20" }
+}

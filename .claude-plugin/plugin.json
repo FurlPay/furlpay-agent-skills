@@ -1,0 +1,21 @@
+{
+  "name": "furlpay-skills",
+  "description": "Agent skills for integrating FurlPay: stablecoin payments, webhook signature verification, and selling API access to AI agents over HTTP 402 (x402). Encodes the exact wire contracts and the failure modes that break most first integrations.",
+  "version": "0.1.0",
+  "author": {
+    "name": "FurlPay"
+  },
+  "homepage": "https://furlpay.com",
+  "repository": "https://github.com/FurlPay/furlpay-agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "furlpay",
+    "payments",
+    "stablecoin",
+    "usdc",
+    "x402",
+    "webhooks",
+    "agentic-payments",
+    "mcp"
+  ]
+}

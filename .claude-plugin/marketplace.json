@@ -1,0 +1,14 @@
+{
+  "name": "furlpay",
+  "owner": {
+    "name": "FurlPay",
+    "url": "https://furlpay.com"
+  },
+  "plugins": [
+    {
+      "name": "furlpay-skills",
+      "source": "./",
+      "description": "Integrate FurlPay stablecoin payments, webhooks and x402 agent payments."
+    }
+  ]
+}
