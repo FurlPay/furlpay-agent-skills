@@ -1,5 +1,10 @@
 # FurlPay Agent Skills
 
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![MCP](https://img.shields.io/badge/MCP-000000?style=flat-square&logo=modelcontextprotocol&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=claude&logoColor=white)
+![x402](https://img.shields.io/badge/x402-0052FF?style=flat-square)
+
 Procedural integration knowledge for AI coding agents — Claude Code, Cursor, Codex,
 Copilot, Windsurf, and any MCP-aware client.
 
